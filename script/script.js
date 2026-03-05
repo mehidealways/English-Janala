@@ -15,17 +15,27 @@ const displayLevelWord = words => {
   console.log(words);
   const wordContainer = document.getElementById('wordContainer');
   wordContainer.innerHTML = '';
+  // Condition
+  if (words.length == 0) {
+      wordContainer.innerHTML = `<div class="text-center col-span-full space-y-5 font-bangla ">
+  <img class = " mx-auto" src="./assets/alert-error.png" alt="">
+  <p class="text-xl text-gray-500 font-semibold">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+  <h2 class="text-2xl font-semibold text-gray-500">নেক্সট Lesson এ যান।</h2>
+</div>`;
+    return
+  }
+
 
   words.forEach(word => {
     // console.log(word);
     const card = document.createElement('div');
     card.innerHTML = `
    <div class="bg-white rounded-md shadow-sm text-center p-10 space-y-4">
-  <h2 class="font-bold text-2xl">${word.word}</h2>
+  <h2 class="font-bold text-2xl">${word.word ? word.word : 'শব্দ পাওয়া যায়নি'}</h2>
   <p class="font-semibold">meaning / pronunciation</p>
   
   <div class="text-2xl font-medium font-bangla">
-  "${word.meaning} / ${word.pronunciation}"
+  "${word.meaning ? word.meaning : 'অর্থ পাওয়া যায়নি'} / ${word.pronunciation ? word.pronunciation : 'pronunciation পাওয়া যায়নি'}"
   </div>
   
   <div class="flex justify-between items-center ">
